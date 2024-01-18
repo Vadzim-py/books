@@ -185,4 +185,6 @@ fabric.properties
 # idea folder, uncomment if you don't need it
 # .idea
 
+#  added by user
 !/core/templates/include/
+!/htmlcov/
