@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store'
+
+    'social_django',
+
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +58,7 @@ ROOT_URLCONF = 'books.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,6 +88,12 @@ DATABASES = {
     }
 }
 
+# Python Social Auth AUTHENTICATION_BACKENDS setting
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -137,3 +146,12 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     )
 }
+
+# Python Social Auth JSONB field
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+# Social auth GitHub key and client secret for Python Social Auth
+
+SOCIAL_AUTH_GITHUB_KEY = '821ac5ec937d91a45aac'
+SOCIAL_AUTH_GITHUB_SECRET = '742b7dc932cec46e70271fe2e1eff7e8a34b6802'

@@ -7,4 +7,4 @@ class Book(models.Model):
     author_name = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'ID {self.id}: {self.name}'
+        return f'ID {self.id}: {self.name}, by {self.author_name}'

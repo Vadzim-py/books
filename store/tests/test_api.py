@@ -36,3 +36,11 @@ class BooksApiTestCase(APITestCase):
                                           self.book_3], many=True).data
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(serializer_data, response.data)
+
+    def test_get_myself(self):
+        url = reverse('book-list')
+        response = self.client.get(url, data={'name': 'Test book 2'})
+        # get coverage for name and variable setUp value from
+        serializer_data = BookSerializer([self.book_2], many=True).data
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(serializer_data, response.data)
