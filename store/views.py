@@ -13,7 +13,7 @@ from django.db.models import Count, Case, When, Avg
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all().annotate(
             annotated_likes=Count(Case(When(userbookrelation__like=True, then=1))), rating=Avg('userbookrelation__rate')
-        ).order_by('id')
+        ).select_related('owner').prefetch_related('readers').order_by('id')
     serializer_class = BookSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend, SearchFilter, OrderingFilter]
     permission_classes = [IsOwnerOrStaffOrReadOnly]  # permission to get data for all users

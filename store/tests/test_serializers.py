@@ -9,9 +9,9 @@ class BookSerializerTestCase(TestCase):
     def test_ok(self):
         # Assuming User model has been imported and there is a user with username 'Author 1'
         users = get_user_model()
-        author_1 = users.objects.create_user(username='Author 1')
-        author_2 = users.objects.create_user(username='Author 2')
-        author_3 = users.objects.create_user(username='Author 3')
+        author_1 = users.objects.create_user(username='Author 1', first_name='A', last_name='B')
+        author_2 = users.objects.create_user(username='Author 2', first_name='C', last_name='D')
+        author_3 = users.objects.create_user(username='Author 3', first_name='E', last_name='F')
 
         book_1 = Book.objects.create(name='Test book 1', price=25, author_name='Author 1', owner=author_1)
         book_2 = Book.objects.create(name='Test book 2', price=55, author_name='Author 2', owner=author_2)
@@ -35,18 +35,46 @@ class BookSerializerTestCase(TestCase):
                 'name': 'Test book 1',
                 'price': '25.00',  # from serial converts this to a decimal
                 'author_name': 'Author 1',
-                'likes_count': 3,
                 'annotated_likes': 3,
-                'rating': '4.67'
+                'rating': '4.67',
+                'owner_name': 'Author 1',
+                'readers': [
+                    {
+                        'first_name': 'A',
+                        'last_name': 'B'
+                    },
+                    {
+                        'first_name': 'C',
+                        'last_name': 'D'
+                    },
+                    {
+                        'first_name': 'E',
+                        'last_name': 'F'
+                    },
+                ]
             },
             {
                 'id': book_2.id,
                 'name': 'Test book 2',
                 'price': '55.00',  # decimal value
                 'author_name': 'Author 2',
-                'likes_count': 2,
                 'annotated_likes': 2,
-                'rating': '3.50'
+                'rating': '3.50',
+                'owner_name': 'Author 2',
+                'readers': [
+                    {
+                        'first_name': 'A',
+                        'last_name': 'B'
+                    },
+                    {
+                        'first_name': 'C',
+                        'last_name': 'D'
+                    },
+                    {
+                        'first_name': 'E',
+                        'last_name': 'F'
+                    },
+                ]
             },
         ]
         self.assertEqual(expected_data, data)
