@@ -1,0 +1,1 @@
+Coursework on the development of backend, API and business logic of the application on Django REST framework.Special attention was given to unit tests and optimization of the application by database queries.
